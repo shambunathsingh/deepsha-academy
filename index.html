@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Deepsha Academy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="icon"
+      href="https://cdn-icons-png.flaticon.com/512/3135/3135755.png"
+    />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  </head>
+
+  <body class="font-sans text-gray-800 scroll-smooth">
+    <!-- Navbar -->
+    <header class="bg-white fixed w-full shadow-md z-50">
+      <nav class="container mx-auto flex justify-between items-center p-4">
+        <h1 class="text-2xl font-bold text-blue-800">Deepsha Academy</h1>
+        <ul class="hidden md:flex gap-8 text-gray-700">
+          <li><a href="#home" class="hover:text-blue-700">Home</a></li>
+          <li><a href="#about" class="hover:text-blue-700">About</a></li>
+          <li><a href="#courses" class="hover:text-blue-700">Courses</a></li>
+          <li>
+            <a href="#testimonials" class="hover:text-blue-700">Testimonials</a>
+          </li>
+          <li><a href="#blog" class="hover:text-blue-700">Blog</a></li>
+          <li><a href="#contact" class="hover:text-blue-700">Contact</a></li>
+        </ul>
+        <button class="md:hidden text-2xl" id="menu-btn">☰</button>
+      </nav>
+      <ul
+        class="hidden flex-col items-center bg-white shadow-md md:hidden"
+        id="mobile-menu"
+      >
+        <li><a href="#home" class="block py-2">Home</a></li>
+        <li><a href="#about" class="block py-2">About</a></li>
+        <li><a href="#courses" class="block py-2">Courses</a></li>
+        <li><a href="#testimonials" class="block py-2">Testimonials</a></li>
+        <li><a href="#blog" class="block py-2">Blog</a></li>
+        <li><a href="#contact" class="block py-2">Contact</a></li>
+      </ul>
+    </header>
+
+    <!-- Hero -->
+    <section
+      id="home"
+      class="relative h-screen bg-cover bg-center flex items-center justify-center"
+      style="
+        background-image: url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1400&q=80');
+      "
+    >
+      <div class="absolute inset-0 bg-blue-900 bg-opacity-60"></div>
+      <div class="text-center text-white relative z-10 px-6" data-aos="zoom-in">
+        <h2 class="text-4xl md:text-6xl font-bold mb-4">
+          Empower Your Future with Deepsha Academy
+        </h2>
+        <p class="text-lg md:text-xl mb-6">
+          Where learning meets excellence — and passion fuels purpose.
+        </p>
+        <a
+          href="#courses"
+          class="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-bold py-3 px-6 rounded-lg"
+          >Explore Courses</a
+        >
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="py-20 bg-gray-50">
+      <div
+        class="container mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center gap-10"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1596495577886-d920f1fb7238?auto=format&fit=crop&w=800&q=80"
+          alt="About us"
+          class="rounded-2xl shadow-lg md:w-1/2"
+          data-aos="fade-right"
+        />
+        <div class="md:w-1/2" data-aos="fade-left">
+          <h2 class="text-3xl font-bold text-blue-800 mb-4">
+            About Our Institute
+          </h2>
+          <p class="text-gray-700 mb-6">
+            Deepsha Academy provides modern, practical, and goal-oriented
+            training in computer and web development. We bridge the gap between
+            academic learning and industry expectations.
+          </p>
+          <a
+            href="#contact"
+            class="bg-blue-800 text-white px-6 py-3 rounded-lg hover:bg-blue-900"
+            >Join Us</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- Courses -->
+    <section id="courses" class="py-20">
+      <div class="container mx-auto px-6">
+        <h2
+          class="text-3xl font-bold text-center text-blue-800 mb-10"
+          data-aos="fade-up"
+        >
+          Our Popular Courses
+        </h2>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div
+            class="bg-white shadow-lg rounded-xl overflow-hidden hover:scale-105 transition-transform"
+            data-aos="zoom-in"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80"
+              alt="Web Development"
+            />
+            <div class="p-6">
+              <h3 class="font-semibold text-xl mb-2 text-blue-700">
+                Web Development
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Master HTML, CSS, JavaScript, PHP, and MySQL from scratch with
+                live projects.
+              </p>
+              <a href="#" class="text-blue-700 font-semibold hover:underline"
+                >Learn More →</a
+              >
+            </div>
+          </div>
+          <div
+            class="bg-white shadow-lg rounded-xl overflow-hidden hover:scale-105 transition-transform"
+            data-aos="zoom-in"
+            data-aos-delay="150"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80"
+              alt="Python"
+            />
+            <div class="p-6">
+              <h3 class="font-semibold text-xl mb-2 text-blue-700">
+                Python Programming
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Learn Python fundamentals, data handling, and automation
+                projects step-by-step.
+              </p>
+              <a href="#" class="text-blue-700 font-semibold hover:underline"
+                >Learn More →</a
+              >
+            </div>
+          </div>
+          <div
+            class="bg-white shadow-lg rounded-xl overflow-hidden hover:scale-105 transition-transform"
+            data-aos="zoom-in"
+            data-aos-delay="300"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=80"
+              alt="Design"
+            />
+            <div class="p-6">
+              <h3 class="font-semibold text-xl mb-2 text-blue-700">
+                UI/UX Design
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Learn design principles and create meaningful, engaging user
+                experiences.
+              </p>
+              <a href="#" class="text-blue-700 font-semibold hover:underline"
+                >Learn More →</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quote Section -->
+    <section
+      class="py-20 bg-blue-900 text-white text-center"
+      data-aos="fade-up"
+    >
+      <div class="container mx-auto px-6">
+        <blockquote class="text-2xl md:text-3xl font-semibold italic mb-4">
+          "Education is the weapon that can change the world — master it, and
+          the world bends for you."
+        </blockquote>
+        <p class="text-yellow-300 font-medium">— Deepsha Academy Vision</p>
+      </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="py-20 bg-gray-50">
+      <div class="container mx-auto px-6">
+        <h2
+          class="text-3xl font-bold text-center text-blue-800 mb-10"
+          data-aos="fade-up"
+        >
+          Latest Insights & Articles
+        </h2>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div
+            class="bg-white rounded-xl shadow-lg overflow-hidden hover:scale-105 transition-transform"
+            data-aos="fade-up"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1596495577886-d920f1fb7238?auto=format&fit=crop&w=800&q=80"
+              alt="Blog 1"
+            />
+            <div class="p-6">
+              <h3 class="font-semibold text-xl mb-2 text-blue-700">
+                The Future of Coding Education
+              </h3>
+              <p class="text-gray-600 mb-4">
+                AI, automation, and the evolution of learning technology.
+              </p>
+              <a href="#" class="text-blue-700 font-semibold hover:underline"
+                >Read More →</a
+              >
+            </div>
+          </div>
+          <div
+            class="bg-white rounded-xl shadow-lg overflow-hidden hover:scale-105 transition-transform"
+            data-aos="fade-up"
+            data-aos-delay="150"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1555421689-491a97ff2040?auto=format&fit=crop&w=800&q=80"
+              alt="Blog 2"
+            />
+            <div class="p-6">
+              <h3 class="font-semibold text-xl mb-2 text-blue-700">
+                How to Build Projects That Get You Hired
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Learn the kind of portfolios that impress recruiters.
+              </p>
+              <a href="#" class="text-blue-700 font-semibold hover:underline"
+                >Read More →</a
+              >
+            </div>
+          </div>
+          <div
+            class="bg-white rounded-xl shadow-lg overflow-hidden hover:scale-105 transition-transform"
+            data-aos="fade-up"
+            data-aos-delay="300"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80"
+              alt="Blog 3"
+            />
+            <div class="p-6">
+              <h3 class="font-semibold text-xl mb-2 text-blue-700">
+                Balancing Learning & Productivity
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Smart habits to stay consistent without burning out.
+              </p>
+              <a href="#" class="text-blue-700 font-semibold hover:underline"
+                >Read More →</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Subscribe Section -->
+    <section
+      class="py-20 bg-yellow-400 text-blue-900 text-center"
+      data-aos="zoom-in"
+    >
+      <div class="container mx-auto px-6">
+        <h2 class="text-3xl font-bold mb-4">
+          Stay Updated with Deepsha Academy
+        </h2>
+        <p class="mb-6 text-lg">
+          Get the latest news, course updates, and learning tips directly to
+          your inbox.
+        </p>
+        <form class="max-w-lg mx-auto flex flex-col md:flex-row gap-4">
+          <input
+            type="email"
+            placeholder="Enter your email"
+            class="flex-grow p-3 rounded-lg text-gray-800"
+            required
+          />
+          <button
+            class="bg-blue-900 text-white px-6 py-3 rounded-lg hover:bg-blue-800"
+          >
+            Subscribe
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="py-16 bg-gray-50">
+      <div
+        class="container mx-auto flex flex-col md:flex-row items-center gap-10 px-6"
+      >
+        <!-- Map Section -->
+        <div class="w-full md:w-1/2">
+          <iframe
+            class="w-full h-96 rounded-xl shadow-lg"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14678.198317469705!2d85.8331926!3d20.2960584!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a1909b63d1c0a1f%3A0xd4ebcf0b53ab5c7f!2sBhubaneswar%2C%20Odisha!5e0!3m2!1sen!2sin!4v1689944556276!5m2!1sen!2sin"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          >
+          </iframe>
+        </div>
+
+        <!-- Contact Form Section -->
+        <div class="w-full md:w-1/2">
+          <h3 class="text-3xl font-bold mb-4 text-blue-900">Contact Us</h3>
+          <p class="text-gray-700 mb-6">
+            We’re here to help. Reach out for course details, enrollment, or any
+            questions.
+          </p>
+
+          <form class="space-y-4">
+            <input
+              type="text"
+              placeholder="Your Name"
+              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-900"
+            />
+
+            <input
+              type="email"
+              placeholder="Your Email"
+              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-900"
+            />
+
+            <textarea
+              placeholder="Your Message"
+              rows="4"
+              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-900"
+            ></textarea>
+
+            <button
+              type="submit"
+              class="bg-blue-900 text-white px-6 py-2 rounded-lg hover:bg-blue-800 transition"
+            >
+              Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-blue-950 text-white pt-12 pb-6">
+      <div
+        class="container mx-auto px-6 grid md:grid-cols-3 gap-8 text-center md:text-left"
+      >
+        <div>
+          <h3 class="text-xl font-bold mb-4">Deepsha Academy</h3>
+          <p class="text-gray-300">
+            Empowering students through quality education and real-world skill
+            training.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold mb-4">Contact</h3>
+          <p>📍 Plot No. 45, Chandrasekharpur, Bhubaneswar, Odisha</p>
+          <p>📞 +91 98765 43210</p>
+          <p>✉️ info@deepshaacademy.in</p>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold mb-4">Follow Us</h3>
+          <div class="flex justify-center md:justify-start gap-4">
+            <a href="#" class="hover:text-yellow-400">Facebook</a>
+            <a href="#" class="hover:text-yellow-400">Instagram</a>
+            <a href="#" class="hover:text-yellow-400">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+      <div class="text-center text-gray-400 mt-8 border-t border-gray-700 pt-4">
+        <p>© 2025 Deepsha Academy. All Rights Reserved.</p>
+      </div>
+    </footer>
+
+    <!-- JS -->
+    <script>
+      const menuBtn = document.getElementById("menu-btn");
+      const mobileMenu = document.getElementById("mobile-menu");
+      menuBtn.addEventListener("click", () =>
+        mobileMenu.classList.toggle("hidden")
+      );
+    </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({ once: true, duration: 900, easing: "ease-in-out" });
+    </script>
+  </body>
+</html>
