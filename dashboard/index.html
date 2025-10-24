@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Enterprise Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .sidebar {
+            width: 260px;
+        }
+
+        .dark-mode {
+            background-color: #1E293B;
+            color: #E2E8F0;
+        }
+
+        .dark-mode .bg-white {
+            background-color: #334155 !important;
+        }
+
+        .dark-mode .text-gray-500 {
+            color: #94A3B8 !important;
+        }
+
+        .widget {
+            cursor: move;
+            transition: all 0.3s;
+            border-radius: 12px;
+        }
+
+        .submenu {
+            display: none;
+        }
+
+        .submenu-open {
+            display: block;
+        }
+
+        .card-gradient {
+            background: linear-gradient(135deg, #2563EB, #9333EA);
+            color: white;
+        }
+
+        .card-gradient-green {
+            background: linear-gradient(135deg, #16A34A, #4ADE80);
+            color: white;
+        }
+
+        .card-gradient-yellow {
+            background: linear-gradient(135deg, #F59E0B, #FCD34D);
+            color: white;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 flex h-screen overflow-hidden">
+
+    <!-- Sidebar -->
+    <aside id="sidebar" class="sidebar bg-white h-screen p-6 shadow-xl flex flex-col fixed top-0 left-0">
+        <h1 class="text-2xl font-bold mb-8 text-blue-700">EnterprisePanel</h1>
+        <nav class="flex flex-col gap-2 overflow-auto flex-1">
+            <a href="#" class="p-3 rounded hover:bg-blue-500 hover:text-white active">Dashboard</a>
+            <div>
+                <button class="p-3 w-full text-left rounded hover:bg-blue-500 hover:text-white" id="usersBtn">Users
+                    ▾</button>
+                <div id="usersSubmenu" class="flex flex-col gap-1 ml-3 submenu">
+                    <a href="#" class="p-2 rounded hover:bg-blue-500 hover:text-white">All Users</a>
+                    <a href="#" class="p-2 rounded hover:bg-blue-500 hover:text-white">Add User</a>
+                </div>
+            </div>
+            <a href="#" class="p-3 rounded hover:bg-blue-500 hover:text-white">Analytics</a>
+            <div>
+                <button class="p-3 w-full text-left rounded hover:bg-blue-500 hover:text-white"
+                    id="settingsBtn">Settings ▾</button>
+                <div id="settingsSubmenu" class="flex flex-col gap-1 ml-3 submenu">
+                    <a href="#" class="p-2 rounded hover:bg-blue-500 hover:text-white">General</a>
+                    <a href="#" class="p-2 rounded hover:bg-blue-500 hover:text-white">Security</a>
+                </div>
+            </div>
+        </nav>
+        <button id="collapseBtn" class="mt-auto p-2 bg-blue-600 text-white rounded hover:bg-blue-700">Collapse</button>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="flex-1 flex flex-col ml-64">
+
+        <!-- Fixed Top Navbar -->
+        <header class="bg-white shadow h-16 flex items-center justify-between px-6 fixed top-0 left-64 right-0 z-20">
+            <h2 class="text-2xl font-bold text-gray-800">Dashboard</h2>
+            <div class="flex items-center gap-4">
+                <input type="text" placeholder="Search..." class="border rounded px-3 py-2" />
+                <div class="relative">
+                    <button id="notifBtn" class="relative">🔔<span id="notifCounter"
+                            class="absolute top-0 right-0 w-3 h-3 bg-red-500 rounded-full text-xs text-white text-center">3</span></button>
+                    <div id="notifDropdown"
+                        class="hidden absolute right-0 mt-2 w-64 bg-white shadow-lg rounded p-3 z-10">
+                        <p class="font-bold mb-2">Notifications</p>
+                        <ul id="notifList" class="space-y-2">
+                            <li>New user registered</li>
+                            <li>Order #342 completed</li>
+                            <li>Server backup completed</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="relative">
+                    <button id="profileBtn">👤</button>
+                    <div id="profileDropdown"
+                        class="hidden absolute right-0 mt-2 w-40 bg-white shadow-lg rounded p-3 z-10">
+                        <ul class="space-y-2">
+                            <li><a href="#" class="hover:text-blue-500">Profile</a></li>
+                            <li><a href="#" class="hover:text-blue-500">Settings</a></li>
+                            <li><a href="#" class="hover:text-blue-500">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <button id="darkModeBtn" class="p-2 bg-gray-200 rounded hover:bg-gray-300">🌙</button>
+            </div>
+        </header>
+
+        <!-- Scrollable Content -->
+        <main class="flex-1 mt-16 p-6 overflow-auto bg-gray-50">
+            <div id="widgetGrid" class="grid grid-cols-2 gap-6">
+                <!-- Widgets -->
+                <div class="widget card-gradient p-5 shadow-lg" draggable="true" id="widget1">
+                    <h3 class="text-xl font-bold mb-3">Sales Overview</h3>
+                    <canvas id="salesChart" height="200"></canvas>
+                    <button class="mt-2 bg-white text-blue-600 px-2 py-1 rounded hover:bg-blue-600 hover:text-white"
+                        onclick="removeWidget('widget1')">Remove</button>
+                </div>
+                <div class="widget card-gradient-green p-5 shadow-lg" draggable="true" id="widget2">
+                    <h3 class="text-xl font-bold mb-3">User Growth</h3>
+                    <canvas id="userChart" height="200"></canvas>
+                    <button class="mt-2 bg-white text-green-600 px-2 py-1 rounded hover:bg-green-600 hover:text-white"
+                        onclick="removeWidget('widget2')">Remove</button>
+                </div>
+                <div class="widget card-gradient-yellow p-5 shadow-lg" draggable="true" id="widget3">
+                    <h3 class="text-xl font-bold mb-3">Revenue Stats</h3>
+                    <canvas id="revenueChart" height="200"></canvas>
+                    <button class="mt-2 bg-white text-yellow-600 px-2 py-1 rounded hover:bg-yellow-600 hover:text-white"
+                        onclick="removeWidget('widget3')">Remove</button>
+                </div>
+                <div class="widget bg-gradient-to-r from-purple-500 to-pink-500 p-5 shadow-lg text-white"
+                    draggable="true" id="widget4">
+                    <h3 class="text-xl font-bold mb-3">Orders</h3>
+                    <canvas id="orderChart" height="200"></canvas>
+                    <button class="mt-2 bg-white text-pink-500 px-2 py-1 rounded hover:bg-pink-500 hover:text-white"
+                        onclick="removeWidget('widget4')">Remove</button>
+                </div>
+            </div>
+            <button onclick="addWidget()" class="mt-6 p-2 bg-blue-600 text-white rounded hover:bg-blue-700">Add New
+                Widget</button>
+        </main>
+
+    </div>
+
+    <script>
+        // Sidebar & submenu
+        document.getElementById('collapseBtn').addEventListener('click', () => {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.style.width = sidebar.style.width === '60px' ? '260px' : '60px';
+        });
+        document.getElementById('usersBtn').addEventListener('click', () => document.getElementById('usersSubmenu').classList.toggle('submenu-open'));
+        document.getElementById('settingsBtn').addEventListener('click', () => document.getElementById('settingsSubmenu').classList.toggle('submenu-open'));
+
+        // Notifications & profile dropdowns
+        document.getElementById('notifBtn').addEventListener('click', () => document.getElementById('notifDropdown').classList.toggle('hidden'));
+        document.getElementById('profileBtn').addEventListener('click', () => document.getElementById('profileDropdown').classList.toggle('hidden'));
+
+        // Dark mode toggle
+        document.getElementById('darkModeBtn').addEventListener('click', () => document.body.classList.toggle('dark-mode'));
+
+        // Charts
+        const salesChart = new Chart(document.getElementById('salesChart'), {
+            type: 'line',
+            data: { labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'], datasets: [{ label: 'Sales ($)', data: [1200, 1900, 3000, 5000, 2300, 3400, 4200], borderColor: '#fff', backgroundColor: 'rgba(255,255,255,0.2)', fill: true, tension: 0.4 }] },
+            options: { responsive: true, plugins: { legend: { labels: { color: '#fff' } } }, scales: { y: { ticks: { color: '#fff' } }, x: { ticks: { color: '#fff' } } } }
+        });
+        const userChart = new Chart(document.getElementById('userChart'), {
+            type: 'bar',
+            data: { labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'], datasets: [{ label: 'New Users', data: [50, 75, 150, 120, 200, 180, 220], backgroundColor: '#fff' }] },
+            options: { responsive: true, plugins: { legend: { labels: { color: '#fff' } } }, scales: { y: { ticks: { color: '#fff' } }, x: { ticks: { color: '#fff' } } } }
+        });
+        const revenueChart = new Chart(document.getElementById('revenueChart'), {
+            type: 'line',
+            data: { labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'], datasets: [{ label: 'Revenue', data: [3000, 5000, 4000, 6000, 5500, 7000, 8000], borderColor: '#fff', backgroundColor: 'rgba(255,255,255,0.2)', fill: true, tension: 0.4 }] },
+            options: { responsive: true, plugins: { legend: { labels: { color: '#fff' } } }, scales: { y: { ticks: { color: '#fff' } }, x: { ticks: { color: '#fff' } } } }
+        });
+        const orderChart = new Chart(document.getElementById('orderChart'), {
+            type: 'bar',
+            data: { labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'], datasets: [{ label: 'Orders', data: [120, 150, 200, 180, 220, 250, 300], backgroundColor: '#fff' }] },
+            options: { responsive: true, plugins: { legend: { labels: { color: '#fff' } } }, scales: { y: { ticks: { color: '#fff' } }, x: { ticks: { color: '#fff' } } } }
+        });
+
+        // Drag & drop widgets
+        function enableDrag() {
+            const widgets = document.querySelectorAll('.widget');
+            let dragged = null;
+            widgets.forEach(widget => {
+                widget.addEventListener('dragstart', () => { dragged = widget; });
+                widget.addEventListener('dragover', e => { e.preventDefault(); });
+                widget.addEventListener('drop', () => { const parent = widget.parentNode; parent.insertBefore(dragged, widget); saveLayout(); });
+            });
+        }
+        enableDrag();
+
+        // Save/restore layout
+        function saveLayout() { const grid = document.getElementById('widgetGrid'); localStorage.setItem('dashboardLayout', grid.innerHTML); }
+        function loadLayout() { const grid = document.getElementById('widgetGrid'); if (localStorage.getItem('dashboardLayout')) grid.innerHTML = localStorage.getItem('dashboardLayout'); enableDrag(); }
+        loadLayout();
+
+        // Live updates
+        setInterval(() => {
+            const nextSale = Math.floor(Math.random() * 5000) + 1000;
+            salesChart.data.datasets[0].data.shift(); salesChart.data.datasets[0].data.push(nextSale); salesChart.update();
+            const nextUser = Math.floor(Math.random() * 300) + 50;
+            userChart.data.datasets[0].data.shift(); userChart.data.datasets[0].data.push(nextUser); userChart.update();
+            const nextRevenue = Math.floor(Math.random() * 10000) + 3000;
+            revenueChart.data.datasets[0].data.shift(); revenueChart.data.datasets[0].data.push(nextRevenue); revenueChart.update();
+            const nextOrder = Math.floor(Math.random() * 400) + 100;
+            orderChart.data.datasets[0].data.shift(); orderChart.data.datasets[0].data.push(nextOrder); orderChart.update();
+
+            const notifList = document.getElementById('notifList');
+            const notifCounter = document.getElementById('notifCounter');
+            const newNotif = `Event #${Math.floor(Math.random() * 500)} occurred`;
+            notifList.innerHTML = `<li>${newNotif}</li>` + notifList.innerHTML;
+            notifCounter.innerText = parseInt(notifCounter.innerText) + 1;
+        }, 5000);
+
+        // Add/remove widgets
+        let widgetCount = 4;
+        function addWidget() {
+            widgetCount++;
+            const grid = document.getElementById('widgetGrid');
+            const div = document.createElement('div');
+            div.className = 'widget bg-gradient-to-r from-indigo-500 to-purple-500 p-5 shadow-lg text-white';
+            div.draggable = true;
+            div.id = 'widget' + widgetCount;
+            div.innerHTML = `<h3 class="text-xl font-bold mb-3">New Widget ${widgetCount}</h3><canvas id="chart${widgetCount}" height="200"></canvas><button class="mt-2 bg-white text-indigo-500 px-2 py-1 rounded hover:bg-indigo-500 hover:text-white" onclick="removeWidget('widget${widgetCount}')">Remove</button>`;
+            grid.appendChild(div);
+            enableDrag();
+            saveLayout();
+        }
+        function removeWidget(id) { const widget = document.getElementById(id); if (widget) { widget.remove(); saveLayout(); } }
+    </script>
+</body>
+
+</html>
